@@ -1,0 +1,19 @@
+FROM ubuntu:latest
+
+MAINTAINER Zhydan AP Unifi
+
+RUN apt-get -y update
+RUN apt-get -y install ca-certificates wget apt-transport-https
+#RUN apt-get -y apt-transport-https
+#RUN apt-get -y wget
+
+RUN apt-get -y install openjdk-8-jdk-headless
+RUN echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' | tee /etc/apt/sources.list.d/100-ubnt-unifi.list
+RUN wget -O /etc/apt/trusted.gpg.d/unifi-repo.gpg https://dl.ui.com/unifi/unifi-repo.gpg
+RUN apt-mark hold openjdk-11-*
+RUN apt-get -y update
+RUN apt-get -y install unifi
+
+#CMD [ "unifi" ]
+
+EXPOSE 8443

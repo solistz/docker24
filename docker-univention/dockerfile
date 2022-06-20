@@ -1,0 +1,14 @@
+FROM 
+
+FQDN=test.energo;
+docker run \
+--detach \
+--cap-add SYS_ADMIN \
+--cap-add MKNOD \
+--volume /sys/fs/cgroup:/sys/fs/cgroup:ro \
+--tmpfs /run \
+--tmpfs /tmp \
+--restart unless-stopped \
+--hostname ${FQDN} \
+--name ${FQDN} \
+univention/univention-corporate-server
